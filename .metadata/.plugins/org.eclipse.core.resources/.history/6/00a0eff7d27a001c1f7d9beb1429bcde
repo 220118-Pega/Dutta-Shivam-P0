@@ -1,0 +1,68 @@
+package com.revature.reimbursements.models;
+enum Status
+{
+	PENDING,DECLINED,APPROVED;
+}
+public class Issue {
+	
+//	fields->
+	private String title;
+	private String description;
+	private int id;
+	Status s1 = Status.PENDING;
+	
+//	Constructors->
+	public Issue() {
+		 this("No title", "No Description");
+	}
+	
+	public Issue(String title, String description,Status s1) {
+		this.title=title;
+		this.description = description;
+		this.s1=s1;
+		this.id = 0;
+	}
+
+//	getters and setters
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
+	
+	public String toString() {
+		return "Issue [title=" + title + ", description=" + description + ", id=" + id + ", isApproved="+approved+"]";
+	}
+}
+	
+	
+
+	
+	

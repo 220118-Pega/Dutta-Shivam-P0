@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.revature.reimbursements.models.Issue"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="javax.net.ssl.SSLEngineResult.Status"/>
+    <fullyQualifiedTypeName name="com.revature.reimbursements.enums.Status"/>
+    <fullyQualifiedTypeName name="java.time.Instant"/>
+    <fullyQualifiedTypeName name="com.revature.reimbursements.models.Ticket"/>
+    <fullyQualifiedTypeName name="com.revature.reimbursements.enums.Reimbursement"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,64 @@
+package com.revature.reimbursements.models;
+
+public class Ticket {
+	
+//	fields->
+	private String title;
+	private String description;
+	private int id;
+	enum Status
+//	Constructors->
+	public Issue() {
+		 this("No title", "No Description");
+	}
+	
+	public Issue(String title, String description,Status) {
+		this.title=title;
+		this.description = description;
+		this.Status.
+		this.id = 0;
+	}
+
+//	getters and setters
+	
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
+	
+	public String toString() {
+		return "Issue [title=" + title + ", description=" + description + ", id=" + id + ", isApproved="+approved+"]";
+	}
+}
+	
+	
+
+	
+	

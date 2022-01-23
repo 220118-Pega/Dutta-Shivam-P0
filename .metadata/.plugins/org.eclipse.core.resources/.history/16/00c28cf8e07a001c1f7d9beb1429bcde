@@ -1,0 +1,15 @@
+package com.revature.reimbursements;
+
+import com.revature.reimbursements.enums.Reimbursement;
+import com.revature.reimbursements.models.Ticket;
+
+public class Driver {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Ticket t1 = new Ticket(2,Reimbursement.LODGING,20.0);
+		System.out.println(t1);
+
+	}
+
+}

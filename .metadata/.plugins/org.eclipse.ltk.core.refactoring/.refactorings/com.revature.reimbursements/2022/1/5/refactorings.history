@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete element from project &apos;com.revature.reimbursements&apos;&#x0D;&#x0A;- Original project: &apos;com.revature.reimbursements&apos;&#x0D;&#x0A;- Original element: &apos;.gitignore&apos;" description="Delete element" element1=".gitignore" elements="0" flags="589830" id="org.eclipse.jdt.ui.delete" resources="1" stamp="1642902723667" subPackages="false" version="1.0"/>
+</session>
