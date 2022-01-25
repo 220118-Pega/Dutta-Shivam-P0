@@ -1,14 +1,14 @@
 package test.java;
 
-import static org.junit.jupiter.api.Assertions.*;
-
+import org.junit.Assert;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class SolutionTest {
-
+	@Disabled
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		Assert.fail("Not yet implemented");
 	}
 
 }

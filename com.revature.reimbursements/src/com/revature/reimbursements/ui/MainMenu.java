@@ -2,6 +2,8 @@ package com.revature.reimbursements.ui;
 
 import java.util.Scanner;
 
+import com.revature.reimbursement.bl.ITicketBL;
+import com.revature.reimbursement.bl.TicketBL;
 import com.revature.reimbursements.enums.Reimbursement;
 import com.revature.reimbursements.models.Ticket;
 
@@ -10,11 +12,13 @@ public class MainMenu {
 	
 //	fields->
 	private Scanner myScanner;
+	private TicketBL ticketBL;
 	
 //	Constructor->
 
-	public MainMenu(Scanner myScanner) {
+	public MainMenu(Scanner myScanner,TicketBL ticketBL) {
 		this.myScanner=myScanner;
+		this.ticketBL = ticketBL;
 	}
 	
 
@@ -47,9 +51,11 @@ public class MainMenu {
 					break;
 				case "2":
 					System.out.println("View specific ticket.....");
+					
 					break;
 				case "3":
 					System.out.println("Viewing all tickets");
+					viewTicket();    //-----> Calling the viewTicket method.
 					break;
 				case "4":
 					System.out.println("Updating ticket ....");
@@ -67,7 +73,7 @@ public class MainMenu {
 		
 	}
 
-
+// --------------------------------------------------------------------Creating Ticket ------------------------------------------------------------------------------------------>>
 private void createTicket() {
 //	Getting the Input from user 
 //	1. User's employeeId--->
@@ -120,7 +126,7 @@ private void createTicket() {
 		switch(getInput) {
 		case "0":
 			System.out.println("Please write the description: ");
-			String myDescription = myScanner.next();
+			String myDescription = myScanner.nextLine();
 //			Creating the Ticket
 			Ticket newTicket = new Ticket(myEmployeeId,type,transAmount,myDescription);
 			System.out.println(newTicket);
@@ -135,6 +141,14 @@ private void createTicket() {
 			System.out.println("You haven't register the values");
 		}
 		
+}
+
+//------------------------------------------------------------View Ticket--------------------------------------------------------------->>
+
+private void viewTicket() {
+	for(Ticket oneTicket:ticketBL.getTickets()) {
+		System.out.println(oneTicket);
+	}
 }
 		
 }

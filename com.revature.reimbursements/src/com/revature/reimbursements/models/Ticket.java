@@ -42,6 +42,12 @@ public class Ticket {
 		this.description=description;
 		
 	}
+	
+	
+//	public Ticket() {
+//		this.type = Reimbursement.
+//		this(7,Type.Travel,70.0,"Auto generated ticket");
+//	}
 
 	
 //	Getters and setters for ticket class -->
