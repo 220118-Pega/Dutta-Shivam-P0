@@ -5,6 +5,7 @@ import java.util.Scanner;
 import com.revature.reimbursement.bl.ITicketBL;
 import com.revature.reimbursement.bl.TicketBL;
 import com.revature.reimbursements.enums.Reimbursement;
+import com.revature.reimbursements.models.RefundTicket;
 import com.revature.reimbursements.models.Ticket;
 
 //	Class to present UI to end Users to interact with program
@@ -12,23 +13,28 @@ public class MainMenu {
 	
 //	fields->
 	private Scanner myScanner;
-	private TicketBL ticketBL;
+	private ITicketBL ticketBL;
+//	private  int ticketId;
 	
 //	Constructor->
 
-	public MainMenu(Scanner myScanner,TicketBL ticketBL) {
+	public MainMenu(Scanner myScanner,ITicketBL ticketBL) {
 		this.myScanner=myScanner;
 		this.ticketBL = ticketBL;
 	}
 	
+//	public MainMenu(Scanner myScanner,ITicketBL ticketBL) {
+//		this(myScanner,ticketBL);
+//		this.ticketId = ticketId;
+//	}
 
 	
 //	Methods->
-	public void start() {
+	public void start() throws Exception {
 		
 		//Setting a boolean variable to true		
 		boolean isDone = true;
-		
+		int found =0;
 		//while its true
 		while(isDone) {
 			
@@ -51,34 +57,61 @@ public class MainMenu {
 					break;
 				case "2":
 					System.out.println("View specific ticket.....");
-					
+//					viewwOneTicket(ticketId);
 					break;
 				case "3":
 					System.out.println("Viewing all tickets");
-					viewTicket();    //-----> Calling the viewTicket method.
+					viewTicket();
 					break;
 				case "4":
 					System.out.println("Updating ticket ....");
+//					updateTicket(ticketId);
 					break;
 				case "x":
 					System.out.println("exit");
+//					exiting();
+//					try {
+//						myScanner.close();
+//					}catch(IllegalStateException e) {
+//						System.out.println("exited");
+//					}
 					break;
 					
 					default:
 						break;
+						
 			}
 		}
+			
+		}
 		
-		
-		
-	}
+
+
+
+
+
+
+
+
+//private void exiting() throws Exception {
+//	// TODO Auto-generated method stub
+//	System.out.println("do you want exit?"
+//			+ "[0] to exit"
+//			+ "[1] to continue");
+//	String myInput= myScanner.nextLine();
+//	if(myInput.equals("1")) {
+//		start();
+//	}else {
+//		myScanner.close();
+//	}
+//}
 
 // --------------------------------------------------------------------Creating Ticket ------------------------------------------------------------------------------------------>>
 private void createTicket() {
 //	Getting the Input from user 
 //	1. User's employeeId--->
-	System.out.println("Please Enter your EmployeeId: \n");
-	int myEmployeeId = Integer.parseInt(myScanner.nextLine());
+//	System.out.println("Please Enter your EmployeeId: \n");
+//	int myEmployeeId = Integer.parseInt(myScanner.nextLine());
 
 //	2. Reimbursement Type -->
 	System.out.println("What type: [L] LODGING \n"
@@ -116,41 +149,46 @@ private void createTicket() {
 //		3. Transaction amount --->
 		System.out.println("Please Enter the Transaction Amount");
 		String userAmount = myScanner.nextLine();
-		double transAmount = Double.parseDouble(userAmount);
+		int transAmount = Integer.valueOf(userAmount);
 		
-//		4. Write Description ---->
-		System.out.println("Description (Optional): \n");
-		System.out.println("[0] write Description \n"
-				         + "[1] Exit");
-		String getInput = myScanner.nextLine();
-		switch(getInput) {
-		case "0":
-			System.out.println("Please write the description: ");
-			String myDescription = myScanner.nextLine();
-//			Creating the Ticket
-			Ticket newTicket = new Ticket(myEmployeeId,type,transAmount,myDescription);
-			System.out.println(newTicket);
-			break;
-			
-		case "1":
-			Ticket newTicket1 = new Ticket(myEmployeeId,type,transAmount);
-			System.out.println(newTicket1);
-			break;
-			
-		default:
-			System.out.println("You haven't register the values");
-		}
+		RefundTicket myTicket = new RefundTicket(transAmount,type);
+		ticketBL.addTicket(myTicket);
+		System.out.println(myTicket);
+
 		
 }
 
 //------------------------------------------------------------View Ticket--------------------------------------------------------------->>
 
 private void viewTicket() {
-	for(Ticket oneTicket:ticketBL.getTickets()) {
-		System.out.println(oneTicket);
+	for(RefundTicket oneTicket:ticketBL.getTickets()) {
+		System.out.println(oneTicket.getRefundStatus());
+		System.out.println(oneTicket.getTicketId());
 	}
 }
-		
+
+//------------------------------------------------------------View Specific Ticket ------------------------------------------------------->>
+
+//private void viewOneTicket(int ticketId2) throws Exception {
+//	System.out.println("Please enter ticket Id....");
+//	int myEmployeeId = Integer.parseInt(myScanner.nextLine());
+//	Ticket myTicket = ticketBL.getTicketById(myEmployeeId);
+//	System.out.println(myTicket.toString());
+//	System.out.println(myTicket.);
+//	
+//}
+
+//-----------------------------------------------------------Updating the ticket------------------------------------------------------------
+//private void updateTicket(int ticketId2) {
+//	// TODO Auto-generated method stub
+//	System.out.println("Please Enter your EmployeeId: \n");
+//	int myEmployeeId = Integer.parseInt(myScanner.nextLine());
+//	Ticket updatedTicket = ticketBL.updateTicket(myEmployeeId);
+//	System.out.println(updatedTicket);
+//}
+
+
+
 }
 		
 		

@@ -1,7 +1,9 @@
 package com.revature.reimbursement.dl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.reimbursements.models.RefundTicket;
 import com.revature.reimbursements.models.Ticket;
 
 /**
@@ -12,8 +14,8 @@ import com.revature.reimbursements.models.Ticket;
  */
 
 public interface IRepository {
-	void addTicket(Ticket newTicket); // method to add the ticket
-	List<Ticket>getTickets();         // method to get all the tickets
-	Ticket getTicketById(int id) throws Exception;     // method to retrieve ticket by id
-	Ticket setTicketById(int id) throws Exception;     // method to set the ticket by id
+	void addTicket(RefundTicket newTicket); // method to add the ticket
+	List<RefundTicket>getTickets();         // method to get all the tickets
+	RefundTicket getTicketById(int id);     // method to retrieve ticket by id     // method to set the ticket by id
+	RefundTicket ticket2Update(int id);
 }

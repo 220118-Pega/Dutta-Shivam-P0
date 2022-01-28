@@ -43,6 +43,10 @@ public class Ticket {
 		
 	}
 	
+	public Ticket() {
+		this(2,Reimbursement.FOOD,70,"None");
+	}
+	
 	
 //	public Ticket() {
 //		this.type = Reimbursement.

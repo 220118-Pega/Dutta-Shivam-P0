@@ -2,10 +2,29 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="com.revature.reimbursements.models.Issue"/>
     <fullyQualifiedTypeName name="javax.net.ssl.SSLEngineResult.Status"/>
-    <fullyQualifiedTypeName name="com.revature.reimbursements.enums.Status"/>
-    <fullyQualifiedTypeName name="java.time.Instant"/>
-    <fullyQualifiedTypeName name="com.revature.reimbursements.models.Ticket"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="com.revature.reimbursements.ui.MainMenu"/>
+    <fullyQualifiedTypeName name="org.junit.Assert"/>
+    <fullyQualifiedTypeName name="com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type"/>
+    <fullyQualifiedTypeName name="com.revature.reimbursement.bl.TicketBL"/>
+    <fullyQualifiedTypeName name="com.revature.reimbursements.models.Ticket"/>
+    <fullyQualifiedTypeName name="java.time.Instant"/>
+    <fullyQualifiedTypeName name="java.util.Properties"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="java.sql.DriverManager"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="org.apache.logging.log4j.LogManager"/>
+    <fullyQualifiedTypeName name="org.apache.logging.log4j.core.Logger"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="com.revature.reimbursements.enums.Reimbursement"/>
+    <fullyQualifiedTypeName name="java.beans.Statement"/>
+    <fullyQualifiedTypeName name="java.sql.Statement"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.revature.reimbursement.dl.TicketDAO"/>
+    <fullyQualifiedTypeName name="com.revature.reimbursement.dl.DBRepository"/>
+    <fullyQualifiedTypeName name="com.revature.reimbursements.enums.Status"/>
+    <fullyQualifiedTypeName name="com.revature.reimbursements.models.RefundTicket"/>
 </qualifiedTypeNameHistroy>

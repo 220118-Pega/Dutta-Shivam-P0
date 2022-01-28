@@ -2,34 +2,45 @@ package com.revature.reimbursement.bl;
 
 import java.util.List;
 
+import com.revature.reimbursement.dl.DBRepository;
 import com.revature.reimbursement.dl.IRepository;
+import com.revature.reimbursements.models.RefundTicket;
 import com.revature.reimbursements.models.Ticket;
 
 public class TicketBL implements ITicketBL {
 	
-	private IRepository repo;
+	private DBRepository dbRepo;
 	
-	public TicketBL(IRepository repo ) {
-		this.repo = repo;
+	public TicketBL(DBRepository dbRepo) {
+		this.dbRepo = dbRepo;
 	}
 
 	@Override
-	public void addTicket(Ticket ticket) {
+	public void addTicket(RefundTicket ticket) {
 		// TODO Auto-generated method stub
-		repo.addTicket(ticket);
+		dbRepo.addTicket(ticket);
+		
 	}
 
 	@Override
-	public List<Ticket> getTickets() {
+	public List<RefundTicket> getTickets() {
 		// TODO Auto-generated method stub
-		return repo.getTickets();
+		return dbRepo.getTickets();
 	}
 
 	@Override
-	public Ticket getTicketById(int id) throws Exception {
+	public RefundTicket getTicketById(int id) throws Exception {
 		// TODO Auto-generated method stub
-		return repo.getTicketById(id);
+		return dbRepo.getTicketById(id);
 	}
+
+	@Override
+	public RefundTicket updateTicket(int id) {
+		// TODO Auto-generated method stub
+		return dbRepo.ticket2Update(id);
+	}
+
+	
 
 }
 

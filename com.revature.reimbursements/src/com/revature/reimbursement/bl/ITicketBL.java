@@ -2,13 +2,16 @@ package com.revature.reimbursement.bl;
 
 import java.util.List;
 
+import com.revature.reimbursements.models.RefundTicket;
 import com.revature.reimbursements.models.Ticket;
 
 public interface ITicketBL {
 	
-	void addTicket(Ticket ticket);
+	void addTicket(RefundTicket ticket);
 	
-	List<Ticket>getTickets();
+	List<RefundTicket> getTickets();
 	
-	Ticket getTicketById(int id) throws Exception;
+	RefundTicket getTicketById(int id) throws Exception;
+	
+	RefundTicket updateTicket(int id);
 }
