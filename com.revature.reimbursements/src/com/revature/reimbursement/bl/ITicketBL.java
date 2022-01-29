@@ -3,7 +3,7 @@ package com.revature.reimbursement.bl;
 import java.util.List;
 
 import com.revature.reimbursements.models.RefundTicket;
-import com.revature.reimbursements.models.Ticket;
+
 
 public interface ITicketBL {
 	
@@ -11,7 +11,7 @@ public interface ITicketBL {
 	
 	List<RefundTicket> getTickets();
 	
-	RefundTicket getTicketById(int id) throws Exception;
+	RefundTicket getTicketById(int id);
 	
 	RefundTicket updateTicket(int id);
 }

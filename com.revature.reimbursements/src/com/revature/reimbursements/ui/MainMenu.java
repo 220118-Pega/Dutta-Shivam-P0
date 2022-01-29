@@ -2,11 +2,11 @@ package com.revature.reimbursements.ui;
 
 import java.util.Scanner;
 
+import com.revature.reimbursement.bl.IEmployeeBL;
 import com.revature.reimbursement.bl.ITicketBL;
-import com.revature.reimbursement.bl.TicketBL;
 import com.revature.reimbursements.enums.Reimbursement;
+import com.revature.reimbursements.models.Employee;
 import com.revature.reimbursements.models.RefundTicket;
-import com.revature.reimbursements.models.Ticket;
 
 //	Class to present UI to end Users to interact with program
 public class MainMenu {
@@ -14,13 +14,15 @@ public class MainMenu {
 //	fields->
 	private Scanner myScanner;
 	private ITicketBL ticketBL;
-//	private  int ticketId;
+	private IEmployeeBL employeeBL;
+	private  int ticketId;
 	
 //	Constructor->
 
-	public MainMenu(Scanner myScanner,ITicketBL ticketBL) {
+	public MainMenu(Scanner myScanner,ITicketBL ticketBL,IEmployeeBL employeeBL) {
 		this.myScanner=myScanner;
 		this.ticketBL = ticketBL;
+		this.employeeBL=employeeBL;
 	}
 	
 //	public MainMenu(Scanner myScanner,ITicketBL ticketBL) {
@@ -34,7 +36,6 @@ public class MainMenu {
 		
 		//Setting a boolean variable to true		
 		boolean isDone = true;
-		int found =0;
 		//while its true
 		while(isDone) {
 			
@@ -57,7 +58,7 @@ public class MainMenu {
 					break;
 				case "2":
 					System.out.println("View specific ticket.....");
-//					viewwOneTicket(ticketId);
+					viewOneTicket(ticketId);
 					break;
 				case "3":
 					System.out.println("Viewing all tickets");
@@ -69,12 +70,6 @@ public class MainMenu {
 					break;
 				case "x":
 					System.out.println("exit");
-//					exiting();
-//					try {
-//						myScanner.close();
-//					}catch(IllegalStateException e) {
-//						System.out.println("exited");
-//					}
 					break;
 					
 					default:
@@ -86,34 +81,24 @@ public class MainMenu {
 		}
 		
 
-
-
-
-
-
-
-
-//private void exiting() throws Exception {
-//	// TODO Auto-generated method stub
-//	System.out.println("do you want exit?"
-//			+ "[0] to exit"
-//			+ "[1] to continue");
-//	String myInput= myScanner.nextLine();
-//	if(myInput.equals("1")) {
-//		start();
-//	}else {
-//		myScanner.close();
-//	}
-//}
-
 // --------------------------------------------------------------------Creating Ticket ------------------------------------------------------------------------------------------>>
 private void createTicket() {
-//	Getting the Input from user 
-//	1. User's employeeId--->
-//	System.out.println("Please Enter your EmployeeId: \n");
-//	int myEmployeeId = Integer.parseInt(myScanner.nextLine());
+
 
 //	2. Reimbursement Type -->
+	System.out.println("Enter the id of Employee who wants to create ticket");
+	int employeeId = Integer.parseInt(myScanner.nextLine());
+	
+	System.out.println("Enter your name? ");
+	String empName = myScanner.nextLine();
+	
+	System.out.println("Enter your locale? ");
+	String empLocale = myScanner.nextLine();
+	
+	System.out.println("Enter your phone");
+	int employeePhone = Integer.parseInt(myScanner.nextLine());
+	
+	
 	System.out.println("What type: [L] LODGING \n"
 			                     +"[T] TRAVEL  \n"
 			                     +"[F] FOOD     \n"
@@ -141,7 +126,7 @@ private void createTicket() {
 	case "O":
 		type=Reimbursement.valueOf("OTHER");
 		break;
-		
+
 	default:
 		System.out.println("Sorry Wrong Input Please try Again");
 		break;
@@ -151,32 +136,36 @@ private void createTicket() {
 		String userAmount = myScanner.nextLine();
 		int transAmount = Integer.valueOf(userAmount);
 		
+		Employee myEmployee = new Employee(empName,empLocale,employeePhone);
+		employeeBL.addEmployee(myEmployee);
+		
 		RefundTicket myTicket = new RefundTicket(transAmount,type);
+		myTicket.setEmployeeId(employeeId);
 		ticketBL.addTicket(myTicket);
 		System.out.println(myTicket);
-
 		
 }
 
-//------------------------------------------------------------View Ticket--------------------------------------------------------------->>
+		
+
+//------------------------------------------------------------View Tickets--------------------------------------------------------------->>
 
 private void viewTicket() {
 	for(RefundTicket oneTicket:ticketBL.getTickets()) {
-		System.out.println(oneTicket.getRefundStatus());
-		System.out.println(oneTicket.getTicketId());
+		System.out.println(oneTicket);
 	}
 }
 
 //------------------------------------------------------------View Specific Ticket ------------------------------------------------------->>
 
-//private void viewOneTicket(int ticketId2) throws Exception {
-//	System.out.println("Please enter ticket Id....");
-//	int myEmployeeId = Integer.parseInt(myScanner.nextLine());
-//	Ticket myTicket = ticketBL.getTicketById(myEmployeeId);
-//	System.out.println(myTicket.toString());
-//	System.out.println(myTicket.);
-//	
-//}
+private void viewOneTicket(int ticketId){
+	System.out.println("Enter the id of the Employee you'd like to view the ticket for: ");
+	int myTicketId = Integer.parseInt(myScanner.nextLine());
+	RefundTicket myTicket = ticketBL.getTicketById(myTicketId);
+	System.out.println(myTicket);
+}
+	
+	
 
 //-----------------------------------------------------------Updating the ticket------------------------------------------------------------
 //private void updateTicket(int ticketId2) {

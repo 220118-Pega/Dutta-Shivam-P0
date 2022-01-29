@@ -5,7 +5,7 @@ import java.util.List;
 import com.revature.reimbursement.dl.DBRepository;
 import com.revature.reimbursement.dl.IRepository;
 import com.revature.reimbursements.models.RefundTicket;
-import com.revature.reimbursements.models.Ticket;
+
 
 public class TicketBL implements ITicketBL {
 	
@@ -29,7 +29,7 @@ public class TicketBL implements ITicketBL {
 	}
 
 	@Override
-	public RefundTicket getTicketById(int id) throws Exception {
+	public RefundTicket getTicketById(int id){
 		// TODO Auto-generated method stub
 		return dbRepo.getTicketById(id);
 	}

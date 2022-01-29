@@ -6,11 +6,14 @@ import com.revature.reimbursements.enums.Reimbursement;
 import com.revature.reimbursements.enums.Status;
 
 public class RefundTicket {
+
 	private int ticketId;
 	private int refundAmount;
 	private Reimbursement refundType;
 	private Status refundStatus;
 	private Instant timeStamp;
+	private int employeeId;
+	
 	
 	public RefundTicket() {
 		
@@ -23,6 +26,20 @@ public class RefundTicket {
 		this.refundStatus=Status.PENDING;
 		this.timeStamp=Instant.now();
 	}
+	
+	
+	public RefundTicket(int refundAmount,Reimbursement refundType,int ticketID) {
+		this(refundAmount,refundType);
+		this.ticketId=ticketID;
+	}
+	
+	public RefundTicket(int refundAmount,Reimbursement refundType,int ticketId,int employeeId) {
+		this(refundAmount,refundType,ticketId);
+		this.employeeId=employeeId;
+	}
+	
+
+
 
 	public int getRefundAmount() {
 		return refundAmount;
@@ -66,6 +83,22 @@ public class RefundTicket {
 		this.ticketId = ticketId;
 	}
 	
+	
+	
+	public int getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(int employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	@Override
+	public String toString() {
+		return "RefundTicket [ticketId=" + ticketId + ", refundAmount=" + refundAmount + ", refundType=" + refundType
+				+ ", refundStatus=" + refundStatus + ", timeStamp=" + timeStamp + ", employeeId=" + employeeId + "]";
+	}
+
 	
 
 }

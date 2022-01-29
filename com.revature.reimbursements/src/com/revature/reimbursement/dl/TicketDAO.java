@@ -35,10 +35,24 @@ public class TicketDAO implements DAO<RefundTicket,Integer> {
 			// we need to unpack result set to return something to end user
 			if(rs.next())
 			{
+//				Map all other prop of tickets from table to objects
+				// Created an object for my refundTicket class to map the props.				
+				RefundTicket myTicket = new RefundTicket();
+				
+				// Mapping my Id from db to class object				
+				int myId= rs.getInt("id");
+				myTicket.setTicketId(myId);
+				
+				// Mapping my status from db to class object				
+				String refStat = rs.getString("refund_status");
+				Status myRefStat = Status.valueOf(refStat);
+				myTicket.setRefundStatus(myRefStat);
+				
+				// Mapping m=				
 				String refType = rs.getString("refund_type");
 				Reimbursement myRefType = Reimbursement.valueOf(refType);
 				int refAmount = rs.getInt("refund_amount");
-				return new RefundTicket(refAmount,myRefType);
+				return new RefundTicket(refAmount,myRefType,myId);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -56,10 +70,23 @@ public class TicketDAO implements DAO<RefundTicket,Integer> {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
+				
+				RefundTicket myTicket = new RefundTicket();
+				
+				// Mapping my Id from db to class object				
+				int myId= rs.getInt("id");
+				myTicket.setTicketId(myId);
+				System.out.println(myTicket);
+				// Mapping my status from db to class object				
+				String refStat = rs.getString("refund_status");
+				Status myRefStat = Status.valueOf(refStat);
+				myTicket.setRefundStatus(myRefStat);
+				
 				String refType = rs.getString("refund_type");
 				Reimbursement myRefType = Reimbursement.valueOf(refType);
 				int refAmount = rs.getInt("refund_amount");
-				refundTickets.add(new RefundTicket(refAmount,myRefType));
+				int empId = rs.getInt("employee_id");
+				refundTickets.add(new RefundTicket(refAmount,myRefType,myId,empId));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -74,13 +101,14 @@ public class TicketDAO implements DAO<RefundTicket,Integer> {
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
 			String query = "insert into tickets "
-						+ 	"(refund_amount,refund_type,refund_status) "
-						+ 	"values(?,?,?)";
+						+ 	"(refund_amount,refund_type,refund_status,employee_id) "
+						+ 	"values(?,?,?,?)";
 			
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, newObject.getRefundAmount());
 			pstmt.setString(2, newObject.getRefundType().toString());
 			pstmt.setString(3, newObject.getRefundStatus().toString());
+			pstmt.setInt(4, newObject.getEmployeeId());
 			pstmt.execute();
 		}catch(SQLException e) {
 			e.printStackTrace();
