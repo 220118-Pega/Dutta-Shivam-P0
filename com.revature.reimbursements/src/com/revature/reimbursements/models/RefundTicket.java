@@ -19,14 +19,24 @@ public class RefundTicket {
 		
 	}
 	
+	public RefundTicket(int refundAmount,Reimbursement refundType,Status refundStatus,int ticketId,int employeeId) {
+		this.refundAmount=refundAmount;
+		this.refundType=refundType;
+		this.refundStatus=refundStatus;
+		this.ticketId=ticketId;
+		this.employeeId =employeeId;
+	}
+	
 	public RefundTicket(int refundAmount,Reimbursement refundType) {
 		
 		this.refundAmount=refundAmount;
 		this.refundType= refundType;
-		this.refundStatus=Status.PENDING;
 		this.timeStamp=Instant.now();
+		this.refundStatus=Status.PENDING;
+		
 	}
 	
+
 	
 	public RefundTicket(int refundAmount,Reimbursement refundType,int ticketID) {
 		this(refundAmount,refundType);
@@ -37,6 +47,7 @@ public class RefundTicket {
 		this(refundAmount,refundType,ticketId);
 		this.employeeId=employeeId;
 	}
+	
 	
 
 
@@ -95,7 +106,7 @@ public class RefundTicket {
 
 	@Override
 	public String toString() {
-		return "RefundTicket [ticketId=" + ticketId + ", refundAmount=" + refundAmount + ", refundType=" + refundType
+		return "RefundTicket [ticketId=" + getTicketId() + ", refundAmount=" + refundAmount + ", refundType=" + refundType
 				+ ", refundStatus=" + refundStatus + ", timeStamp=" + timeStamp + ", employeeId=" + employeeId + "]";
 	}
 

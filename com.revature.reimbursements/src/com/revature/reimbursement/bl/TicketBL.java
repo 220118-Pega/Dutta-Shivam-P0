@@ -23,7 +23,7 @@ public class TicketBL implements ITicketBL {
 	}
 
 	@Override
-	public List<RefundTicket> getTickets() {
+	public List<RefundTicket> getTickets() throws Exception {
 		// TODO Auto-generated method stub
 		return dbRepo.getTickets();
 	}
@@ -35,9 +35,9 @@ public class TicketBL implements ITicketBL {
 	}
 
 	@Override
-	public RefundTicket updateTicket(int id) {
+	public void updateTicket(RefundTicket ticket) {
 		// TODO Auto-generated method stub
-		return dbRepo.ticket2Update(id);
+		dbRepo.ticket2Update(ticket);
 	}
 
 	

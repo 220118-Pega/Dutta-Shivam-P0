@@ -2,6 +2,7 @@ package com.revature.reimbursement.dl;
 
 import java.util.List;
 
+import com.revature.reimbursements.enums.Status;
 import com.revature.reimbursements.models.Employee;
 import com.revature.reimbursements.models.RefundTicket;
 
@@ -23,7 +24,7 @@ public class DBRepository implements IRepository{
 	}
 
 	@Override
-	public List<RefundTicket> getTickets() {
+	public List<RefundTicket> getTickets() throws Exception {
 		// TODO Auto-generated method stub
 		return ticketDAO.findAll();
 	}
@@ -35,9 +36,9 @@ public class DBRepository implements IRepository{
 	}
 
 	@Override
-	public RefundTicket ticket2Update(int id) {
+	public void ticket2Update(RefundTicket ticket) {
 		// TODO Auto-generated method stub
-		return null;
+		ticketDAO.update(ticket);
 	}
 
 	@Override
@@ -45,5 +46,20 @@ public class DBRepository implements IRepository{
 		// TODO Auto-generated method stub
 		employeeDAO.add(newEmployee);
 	}
+
+	@Override
+	public Employee getEmployeeById(int id) {
+		// TODO Auto-generated method stub
+		return employeeDAO.findById(id);
+	}
+
+	@Override
+	public List<RefundTicket> filterStatus(Status status) {
+		// TODO Auto-generated method stub
+		return ticketDAO.filterStatus(status);
+	}
+
+
+
 
 }

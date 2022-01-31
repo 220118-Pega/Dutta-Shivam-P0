@@ -1,14 +1,25 @@
 package test.java;
 
 import org.junit.Assert;
-import org.junit.jupiter.api.Disabled;
+
 import org.junit.jupiter.api.Test;
 
-class SolutionTest {
-	@Disabled
+import com.revature.reimbursements.models.Employee;
+
+class EmployeeTest {
 	@Test
-	void test() {
-		Assert.fail("Not yet implemented");
+	void IsEmployeeNameIsSet() {
+		// Arrange ======>
+		String empName = "Shivam";
+		Employee myEmp = new Employee();
+		
+		// Act =====>
+		myEmp.setEmployeeName(empName);
+		
+		// Assert =====>
+		Assert.assertEquals(empName, myEmp.getEmployeeName());
+		
+//		Assert.fail("Not yet implemented");
 	}
 
 }

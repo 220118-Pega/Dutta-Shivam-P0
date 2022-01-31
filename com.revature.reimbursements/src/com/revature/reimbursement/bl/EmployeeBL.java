@@ -27,7 +27,7 @@ public class EmployeeBL implements IEmployeeBL{
 	@Override
 	public Employee getEmployeeById(int id) {
 		// TODO Auto-generated method stub
-		return null;
+		return dbRepo.getEmployeeById(id);
 	}
 	
 }

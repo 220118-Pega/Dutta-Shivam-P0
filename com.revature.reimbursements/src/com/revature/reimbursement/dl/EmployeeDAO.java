@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
+
+import com.revature.reimbursements.enums.Status;
 import com.revature.reimbursements.models.Employee;
+import com.revature.reimbursements.models.RefundTicket;
 
 
 
@@ -48,6 +51,7 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 				
 				// 4). Mapping employee phone number---->								
 				int employeePhoneNumber = rs.getInt("employee_phone");
+//				return new Employee();
 				return new Employee(employeeName,employeeLocale,employeePhoneNumber);
 			}
 		}catch(SQLException e) {
@@ -82,6 +86,8 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 				
 				// 4). Mapping employee phone number---->								
 				int employeePhoneNumber = rs.getInt("employee_phone");
+				employeeObj.getTickets();
+//				employees.add(new Employee());
 				employees.add(new Employee(employeeName,employeeLocale,employeePhoneNumber));
 			}
 		}catch(SQLException e) {
@@ -105,6 +111,7 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 			pstmt.setString(2, newObject.getEmployeeLocale());
 			pstmt.setInt(3, newObject.getPhoneNumber());
 			pstmt.execute();
+			newObject.setTickets(null);
 		}catch(SQLException e) {
 			e.printStackTrace();
 			logger.error("Something went wrong",e);
@@ -116,6 +123,12 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 	public void update(Employee newObject) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<RefundTicket> filterStatus(Status status) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

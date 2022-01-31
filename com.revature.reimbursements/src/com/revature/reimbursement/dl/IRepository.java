@@ -3,6 +3,7 @@ package com.revature.reimbursement.dl;
 
 import java.util.List;
 
+import com.revature.reimbursements.enums.Status;
 import com.revature.reimbursements.models.Employee;
 import com.revature.reimbursements.models.RefundTicket;
 
@@ -14,9 +15,12 @@ import com.revature.reimbursements.models.RefundTicket;
  */
 
 public interface IRepository {
-	void addTicket(RefundTicket newTicket); // method to add the ticket
-	List<RefundTicket>getTickets();         // method to get all the tickets
-	RefundTicket getTicketById(int id);     // method to retrieve ticket by id     // method to set the ticket by id
-	RefundTicket ticket2Update(int id);
+	void addTicket(RefundTicket newTicket); 
+	List<RefundTicket>getTickets() throws Exception;
+	RefundTicket getTicketById(int id);
+	List<RefundTicket> filterStatus(Status status);
+	void  ticket2Update(RefundTicket ticket);
 	void addEmployee(Employee newEmployee);
+	Employee getEmployeeById(int id);
+
 }

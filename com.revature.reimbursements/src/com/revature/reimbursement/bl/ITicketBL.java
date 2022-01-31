@@ -9,9 +9,9 @@ public interface ITicketBL {
 	
 	void addTicket(RefundTicket ticket);
 	
-	List<RefundTicket> getTickets();
+	List<RefundTicket> getTickets() throws Exception;
 	
 	RefundTicket getTicketById(int id);
 	
-	RefundTicket updateTicket(int id);
+	void updateTicket(RefundTicket ticket);
 }
