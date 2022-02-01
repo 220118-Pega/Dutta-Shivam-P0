@@ -22,5 +22,7 @@ public interface IRepository {
 	void  ticket2Update(RefundTicket ticket);
 	void addEmployee(Employee newEmployee);
 	Employee getEmployeeById(int id);
+	List<Employee>getEmployees() throws Exception;
+	void updateEmployee(Employee newEmployee);
 
 }

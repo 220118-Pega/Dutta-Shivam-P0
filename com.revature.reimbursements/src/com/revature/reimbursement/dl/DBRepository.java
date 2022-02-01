@@ -59,6 +59,19 @@ public class DBRepository implements IRepository{
 		return ticketDAO.filterStatus(status);
 	}
 
+	@Override
+	public List<Employee> getEmployees() throws Exception {
+		// TODO Auto-generated method stub
+		return employeeDAO.findAll();
+	}
+
+	@Override
+	public void updateEmployee(Employee newEmployee) {
+		// TODO Auto-generated method stub
+		employeeDAO.update(newEmployee);
+		
+	}
+
 
 
 

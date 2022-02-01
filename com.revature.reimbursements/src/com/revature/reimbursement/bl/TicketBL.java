@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.revature.reimbursement.dl.DBRepository;
 import com.revature.reimbursement.dl.IRepository;
+import com.revature.reimbursements.enums.Status;
 import com.revature.reimbursements.models.RefundTicket;
 
 
@@ -38,6 +39,12 @@ public class TicketBL implements ITicketBL {
 	public void updateTicket(RefundTicket ticket) {
 		// TODO Auto-generated method stub
 		dbRepo.ticket2Update(ticket);
+	}
+
+	@Override
+	public List<RefundTicket> filterStatus(Status status) {
+		// TODO Auto-generated method stub
+		return dbRepo.filterStatus(status);
 	}
 
 	

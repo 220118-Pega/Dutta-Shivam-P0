@@ -2,6 +2,7 @@ package com.revature.reimbursement.bl;
 
 import java.util.List;
 
+import com.revature.reimbursements.enums.Status;
 import com.revature.reimbursements.models.RefundTicket;
 
 
@@ -11,7 +12,10 @@ public interface ITicketBL {
 	
 	List<RefundTicket> getTickets() throws Exception;
 	
+	
 	RefundTicket getTicketById(int id);
 	
 	void updateTicket(RefundTicket ticket);
+	
+	List<RefundTicket> filterStatus(Status status);
 }

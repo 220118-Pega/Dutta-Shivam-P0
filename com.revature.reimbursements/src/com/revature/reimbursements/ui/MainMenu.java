@@ -2,6 +2,7 @@ package com.revature.reimbursements.ui;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.apache.logging.log4j.LogManager;
@@ -33,6 +34,7 @@ public class MainMenu {
 		boolean isDone = true;
 		while(isDone) { 			
 			System.out.println("How would you like to interact with the reimburse tickets \n "
+							   + "[E] Create Employee \n"
 					           + "[1] Create ticket \n "
 					           + "[2] View Specific ticket \n "
 					           + "[3] View all Employee tickets \n "
@@ -43,6 +45,10 @@ public class MainMenu {
 			String myOption = myScanner.nextLine();
 			
 			switch(myOption) {
+				case "E":
+					System.out.println("Create Employee");
+					createEmployee();
+					break;
 				case "1":
 					System.out.println("Creating ticket....");
 					createTicket();
@@ -57,7 +63,7 @@ public class MainMenu {
 					break;
 				case "4":
 					System.out.println("Updating ticket ....");
-					updateTicket();
+					viewTickets();
 					break;
 				case "x":
 					System.out.println("exit");
@@ -73,13 +79,70 @@ public class MainMenu {
 		
 
 // --------------------------------------------------------------------Creating Ticket ------------------------------------------------------------------------------------------>>
-private void createTicket() {
+private void createTicket() throws Exception {
 
 
 //	2. Reimbursement Type -->
 	System.out.println("Enter the id of Employee who wants to create ticket");
+	List<Employee> allEmployees = employeeBL.getEmployees();
+	for(Employee oneEmployee:allEmployees) {
+		oneEmployee.getEmployeeId();
+		System.out.println(oneEmployee);
+		
+	}
 	int employeeId = Integer.parseInt(myScanner.nextLine());
+			
+			
+			System.out.println("What type: [L] LODGING \n"
+					                     +"[T] TRAVEL  \n"
+					                     +"[F] FOOD     \n"
+					                     +"[M] MEDICAL  \n"
+					                     +"[O] OTHER    \n");
+			String userInput = myScanner.nextLine(); //---> Getting the userInput
+			Reimbursement type = null;
+			switch(userInput) {
+			case "L":
+				type=Reimbursement.valueOf("LODGING");
+				break;
+				
+			case "T":
+				type=Reimbursement.valueOf("TRAVEL");
+				break;
+				
+			case "F":
+				type=Reimbursement.valueOf("FOOD");
+				break;
+				
+			case "M":
+				type=Reimbursement.valueOf("MEDICAL");
+				break;
+				
+			case "O":
+				type=Reimbursement.valueOf("OTHER");
+				break;
+
+			default:
+				System.out.println("Sorry Wrong Input Please try Again");
+				break;
+			}
+//				3. Transaction amount --->
+				System.out.println("Please Enter the Transaction Amount");
+				String userAmount = myScanner.nextLine();
+				int transAmount = Integer.valueOf(userAmount);
+				
+				
+				
+				RefundTicket myTicket = new RefundTicket(transAmount,type);
+				myTicket.setEmployeeId(employeeId);
+				ticketBL.addTicket(myTicket);
+				
+				System.out.println(myTicket);
+		}
 	
+		
+
+
+private void createEmployee() {
 	System.out.println("Enter your name? ");
 	String empName = myScanner.nextLine();
 	
@@ -89,54 +152,11 @@ private void createTicket() {
 	System.out.println("Enter your phone");
 	int employeePhone = Integer.parseInt(myScanner.nextLine());
 	
+	Employee myEmployee = new Employee(empName,empLocale,employeePhone);
+	employeeBL.addEmployee(myEmployee);	
 	
-	System.out.println("What type: [L] LODGING \n"
-			                     +"[T] TRAVEL  \n"
-			                     +"[F] FOOD     \n"
-			                     +"[M] MEDICAL  \n"
-			                     +"[O] OTHER    \n");
-	String userInput = myScanner.nextLine(); //---> Getting the userInput
-	Reimbursement type = null;
-	switch(userInput) {
-	case "L":
-		type=Reimbursement.valueOf("LODGING");
-		break;
-		
-	case "T":
-		type=Reimbursement.valueOf("TRAVEL");
-		break;
-		
-	case "F":
-		type=Reimbursement.valueOf("FOOD");
-		break;
-		
-	case "M":
-		type=Reimbursement.valueOf("MEDICAL");
-		break;
-		
-	case "O":
-		type=Reimbursement.valueOf("OTHER");
-		break;
-
-	default:
-		System.out.println("Sorry Wrong Input Please try Again");
-		break;
-	}
-//		3. Transaction amount --->
-		System.out.println("Please Enter the Transaction Amount");
-		String userAmount = myScanner.nextLine();
-		int transAmount = Integer.valueOf(userAmount);
-		
-		Employee myEmployee = new Employee(empName,empLocale,employeePhone);
-		employeeBL.addEmployee(myEmployee);	
-		
-		RefundTicket myTicket = new RefundTicket(transAmount,type);
-		myTicket.setEmployeeId(employeeId);
-		myTicket.setTimeStamp(Instant.now());
-		ticketBL.addTicket(myTicket);
-		
-		System.out.println(myTicket);
-		
+	System.out.println(myEmployee);
+	
 }
 
 		
@@ -163,10 +183,15 @@ private void viewTicketById() throws Exception {
 
 //------------------------------------------------------------View Specific Ticket ------------------------------------------------------->>
 
-private void viewAllEmpTicket(){
+private void viewAllEmpTicket() throws Exception{
+	
+	
+	List<Employee> allEmployees = employeeBL.getEmployees();
+	for(Employee oneEmployee:allEmployees) {
+		System.out.println(oneEmployee);
+	}
 	System.out.println("Enter employee ID");
 	int select = Integer.parseInt(myScanner.nextLine());
-	
 	try {
 //			Employee emply = employeeBL.getEmployeeById(select);
 //			int emplId = emply.getEmployeeId();
@@ -235,9 +260,60 @@ private void updateTicket() {
 	}
 }
 
+private void viewTickets() throws Exception {
+	for(RefundTicket oneTicket:ticketBL.getTickets()) {
+		System.out.println(oneTicket);
+	}
+	System.out.println("Filter Tickets by status: "
+					  + "\n[A] Approved"
+					  + "\n[P] Pending"
+					  + "\n[R] Rejected"
+					  + "\n[E] Exit");
+	
+	String select = myScanner.nextLine().toLowerCase();
+	switch(select) {
+	case "a":
+		for(RefundTicket ticket:ticketBL.filterStatus(Status.APPROVED)) {
+			System.out.println(ticket);
+		}
+		updateTicket();
+		break;
+	case "p":
+		for(RefundTicket ticket:ticketBL.filterStatus(Status.PENDING)) {
+			System.out.println(ticket);
+		}
+		updateTicket();
+		break;
+	case "r":
+		for(RefundTicket ticket:ticketBL.filterStatus(Status.REJECTED)) {
+			System.out.println(ticket);
+		}
+		updateTicket();
+		break;
+	case"x":
+		System.out.println("Main menu");
+		start();
+		break;
+	default:
+		System.out.println("OOPS try again");
+		break;
+		
+	}
+}
 
+private void toggleManager(Employee employee) {
+	try {
+		employee.setManager(!employee.isManager());
+		employeeBL.updateEmployee(employee);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
 
 }
+
+
 		
 		
 

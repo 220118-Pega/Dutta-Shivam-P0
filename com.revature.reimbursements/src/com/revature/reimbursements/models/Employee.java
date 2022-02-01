@@ -8,12 +8,29 @@ public class Employee {
 	private String employeeName;
 	private String employeeLocale;
 	private int phoneNumber;
+	private boolean isManager;
 	private List<RefundTicket> tickets;
 	
 	
 	public Employee() {
 		
 	}
+	
+	public Employee(String employeeName, String employeeLocale, int phoneNumber,boolean isManager) {
+		this.employeeName=employeeName;
+		this.employeeLocale=employeeLocale;
+		this.phoneNumber=phoneNumber;
+		this.isManager=isManager;
+	}
+	
+	public Employee(int employeeId,String employeeName, String employeeLocale, int phoneNumber,List<RefundTicket>tickets) {
+		this.employeeId=employeeId;
+		this.employeeName=employeeName;
+		this.employeeLocale=employeeLocale;
+		this.phoneNumber=phoneNumber;
+		this.tickets=tickets;
+	}
+	
 	
 	public Employee(String employeeName, String employeeLocale, int phoneNumber) {
 		this.employeeName=employeeName;
@@ -23,10 +40,10 @@ public class Employee {
 
 
 	
-	public Employee(String employeeName,String employeeLocale, int phoneNumber, List<RefundTicket>tickets) {
-		this(employeeName,employeeLocale,phoneNumber);
-		this.tickets=tickets;
-	}
+//	public Employee(String employeeName,String employeeLocale, int phoneNumber, ) {
+//		this(employeeName,employeeLocale,phoneNumber);
+//		this.tickets=tickets;
+//	}
 	
 	public int getEmployeeId() {
 		return employeeId;
@@ -70,11 +87,22 @@ public class Employee {
 		this.employeeLocale = employeeLocale;
 	}
 
+	public boolean isManager() {
+		return isManager;
+	}
+
+	public void setManager(boolean isManager) {
+		this.isManager = isManager;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [employeeId=" + employeeId + ", employeeName=" + employeeName + ", employeeLocale="
-				+ employeeLocale + ", phoneNumber=" + phoneNumber + ", tickets=" + tickets + "]";
+				+ employeeLocale + ", phoneNumber=" + phoneNumber + ", isManager=" + isManager + ", tickets=" + tickets
+				+ "]";
 	}
+
+
 
 	
 	

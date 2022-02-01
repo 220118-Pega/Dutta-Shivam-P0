@@ -41,7 +41,6 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 				
 				// 1). Mapping my Id from db to class object				
 				int myId= rs.getInt("id");
-				employeeObj.setEmployeeId(myId);
 				
 				// 2). Mapping Employee name from db to class objects
 				String employeeName=rs.getString("employee_name");
@@ -51,8 +50,9 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 				
 				// 4). Mapping employee phone number---->								
 				int employeePhoneNumber = rs.getInt("employee_phone");
+				
 //				return new Employee();
-				return new Employee(employeeName,employeeLocale,employeePhoneNumber);
+				return new Employee(myId,employeeName,employeeLocale,employeePhoneNumber,employeeObj.getTickets());
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -76,7 +76,6 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 				
 				// 1). Mapping my Id from db to class object				
 				int myId= rs.getInt("id");
-				employeeObj.setEmployeeId(myId);
 				
 				// 2). Mapping Employee name from db to class objects
 				String employeeName=rs.getString("employee_name");
@@ -88,7 +87,7 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 				int employeePhoneNumber = rs.getInt("employee_phone");
 				employeeObj.getTickets();
 //				employees.add(new Employee());
-				employees.add(new Employee(employeeName,employeeLocale,employeePhoneNumber));
+				employees.add(new Employee(myId,employeeName,employeeLocale,employeePhoneNumber,employeeObj.getTickets()));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -122,11 +121,29 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 	@Override
 	public void update(Employee newObject) {
 		// TODO Auto-generated method stub
-		
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String query = "update employees set is_Manager = ? where id = ?";
+			PreparedStatement pstmt = conn.prepareStatement(query);
+			pstmt.setBoolean(1, !newObject.isManager());
+			pstmt.setInt(2, newObject.getEmployeeId());
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+		
+		
+	
 
 	@Override
 	public List<RefundTicket> filterStatus(Status status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Employee> getTicketByEmployeeId(Integer employee_id) {
 		// TODO Auto-generated method stub
 		return null;
 	}

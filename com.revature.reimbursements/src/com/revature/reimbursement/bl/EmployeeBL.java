@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.revature.reimbursement.dl.DBRepository;
 import com.revature.reimbursements.models.Employee;
+import com.revature.reimbursements.models.RefundTicket;
 
 public class EmployeeBL implements IEmployeeBL{
 	private DBRepository dbRepo;
@@ -19,15 +20,20 @@ public class EmployeeBL implements IEmployeeBL{
 	}
 
 	@Override
-	public List<Employee> getEmployees() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Employee> getEmployees() throws Exception {
+		return dbRepo.getEmployees();
 	}
 
 	@Override
 	public Employee getEmployeeById(int id) {
 		// TODO Auto-generated method stub
 		return dbRepo.getEmployeeById(id);
+	}
+
+	@Override
+	public void updateEmployee(Employee newEmployee) {
+		// TODO Auto-generated method stub
+		dbRepo.updateEmployee(newEmployee);
 	}
 	
 }
