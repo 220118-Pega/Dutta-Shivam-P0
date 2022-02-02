@@ -1,5 +1,6 @@
 package com.revature.reimbursement.bl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.reimbursement.dl.DBRepository;
@@ -45,6 +46,12 @@ public class TicketBL implements ITicketBL {
 	public List<RefundTicket> filterStatus(Status status) {
 		// TODO Auto-generated method stub
 		return dbRepo.filterStatus(status);
+	}
+
+	@Override
+	public List<RefundTicket> getTicketByEmployeeId(int id) {
+		// TODO Auto-generated method stub
+		return dbRepo.getTicketsByEmployeeId(id);
 	}
 
 	

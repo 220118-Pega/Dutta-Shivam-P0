@@ -25,7 +25,7 @@ public class EmployeeBL implements IEmployeeBL{
 	}
 
 	@Override
-	public Employee getEmployeeById(int id) {
+	public Employee getEmployeeById(int id) throws Exception {
 		// TODO Auto-generated method stub
 		return dbRepo.getEmployeeById(id);
 	}

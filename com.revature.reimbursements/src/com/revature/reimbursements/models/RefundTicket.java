@@ -19,49 +19,24 @@ public class RefundTicket {
 		
 	}
 	
-	public RefundTicket(int refundAmount,Reimbursement refundType,Status refundStatus,Instant timeStamp,int ticketId,int employeeId) {
+	public RefundTicket(Status refundStatus) {
+		this.refundStatus=refundStatus;
+	}
+	
+	public RefundTicket(int refundAmount,Reimbursement refundType,Status refundStatus,Instant timeStamp,int employeeId) {
 		this.refundAmount=refundAmount;
 		this.refundType=refundType;
 		this.refundStatus=refundStatus;
 		this.timeStamp = timeStamp;
-		this.ticketId=ticketId;
 		this.employeeId=employeeId;
 	}
 	
-	
-	public RefundTicket(int refundAmount,Reimbursement refundType,Status refundStatus,Instant timeStamp) {
-		
-		this.refundAmount=refundAmount;
-		this.refundType= refundType;
-		this.refundStatus=refundStatus;
-		this.timeStamp=timeStamp;
-		
-		
+	public RefundTicket(int refundAmount,Reimbursement refundType,Status refundStatus,Instant timeStamp,int employeeId,int ticketId) {
+		this(refundAmount,refundType,refundStatus,timeStamp,employeeId);
+		this.ticketId=ticketId;
 	}
-	
-	public RefundTicket(int refundAmount,Reimbursement refundType) {
-		
-		this.refundAmount=refundAmount;
-		this.refundType= refundType;
-		this.timeStamp=Instant.now();
-		this.refundStatus=Status.PENDING;
-		
-		
-	}
-	
 
-	
-//	public RefundTicket(int refundAmount,Reimbursement refundType,int ticketID) {
-//		this(refundAmount,refundType);
-//		this.ticketId=ticketID;
-//	}
-	
-//	public RefundTicket(int refundAmount,Reimbursement refundType,int ticketId,int employeeId) {
-//		this(refundAmount,refundType,ticketId);
-//		this.employeeId=employeeId;
-//	}
-//	
-	
+
 
 
 

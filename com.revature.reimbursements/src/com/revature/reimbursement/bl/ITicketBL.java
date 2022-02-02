@@ -17,5 +17,7 @@ public interface ITicketBL {
 	
 	void updateTicket(RefundTicket ticket);
 	
+	List<RefundTicket>getTicketByEmployeeId(int id);
+	
 	List<RefundTicket> filterStatus(Status status);
 }

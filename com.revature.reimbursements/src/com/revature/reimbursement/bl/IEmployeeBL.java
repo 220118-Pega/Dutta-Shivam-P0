@@ -12,7 +12,7 @@ public interface IEmployeeBL {
 	
 	List<Employee> getEmployees() throws Exception;
 	
-	Employee getEmployeeById(int id);
+	Employee getEmployeeById(int id) throws Exception;
 	
 	void updateEmployee(Employee newEmployee);
 

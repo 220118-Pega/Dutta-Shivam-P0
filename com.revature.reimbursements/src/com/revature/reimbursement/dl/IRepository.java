@@ -21,8 +21,9 @@ public interface IRepository {
 	List<RefundTicket> filterStatus(Status status);
 	void  ticket2Update(RefundTicket ticket);
 	void addEmployee(Employee newEmployee);
-	Employee getEmployeeById(int id);
+	Employee getEmployeeById(int id) throws Exception;
 	List<Employee>getEmployees() throws Exception;
 	void updateEmployee(Employee newEmployee);
+	List<RefundTicket>getTicketsByEmployeeId(int id);
 
 }

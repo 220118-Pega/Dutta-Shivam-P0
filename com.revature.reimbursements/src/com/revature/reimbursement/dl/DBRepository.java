@@ -1,5 +1,6 @@
 package com.revature.reimbursement.dl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.reimbursements.enums.Status;
@@ -44,13 +45,26 @@ public class DBRepository implements IRepository{
 	@Override
 	public void addEmployee(Employee newEmployee) {
 		// TODO Auto-generated method stub
+		
 		employeeDAO.add(newEmployee);
 	}
 
 	@Override
-	public Employee getEmployeeById(int id) {
+	public Employee getEmployeeById(int id) throws Exception {
 		// TODO Auto-generated method stub
-		return employeeDAO.findById(id);
+		
+		Employee empWanted = employeeDAO.findById(id);
+		List<RefundTicket> allTickets = ticketDAO.findAll();
+		
+		ArrayList<RefundTicket> ticket4Employee = new ArrayList<RefundTicket>();
+		for(RefundTicket oneTicket:allTickets) {
+			if(oneTicket.getEmployeeId()==id) {
+				ticket4Employee.add(oneTicket);
+			}
+				
+		}
+		empWanted.setTickets(ticket4Employee);
+		return empWanted;
 	}
 
 	@Override
@@ -70,6 +84,13 @@ public class DBRepository implements IRepository{
 		// TODO Auto-generated method stub
 		employeeDAO.update(newEmployee);
 		
+	}
+
+	@Override
+	public List<RefundTicket> getTicketsByEmployeeId(int id) {
+		// TODO Auto-generated method stub
+		
+		return ticketDAO.getTicketByEmployeeId(id);
 	}
 
 

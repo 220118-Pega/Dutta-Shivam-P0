@@ -218,7 +218,7 @@ private void createTicket() throws Exception {
 			String userAmount = myScanner.nextLine();
 			int transAmount = Integer.valueOf(userAmount);
 
-			RefundTicket myTicket = new RefundTicket(transAmount, type);
+			RefundTicket myTicket = new RefundTicket(transAmount, type,Status.PENDING,Instant.now(),employee.getEmployeeId());
 			myTicket.setEmployeeId(employeeId);
 			ticketBL.addTicket(myTicket);
 
