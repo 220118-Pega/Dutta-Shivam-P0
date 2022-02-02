@@ -78,9 +78,9 @@ public class RefundTicket {
 		return ticketId;
 	}
 
-	public void setTicketId(int ticketId) {
-		this.ticketId = ticketId;
-	}
+//	public void setTicketId(int ticketId) {
+//		this.ticketId = ticketId;
+//	}
 	
 	
 	

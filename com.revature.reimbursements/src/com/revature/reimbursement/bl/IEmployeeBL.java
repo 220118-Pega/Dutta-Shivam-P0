@@ -15,6 +15,8 @@ public interface IEmployeeBL {
 	Employee getEmployeeById(int id) throws Exception;
 	
 	void updateEmployee(Employee newEmployee);
+	
+	List<RefundTicket> getTicketsIfManager(int id) throws Exception;
 
 //	List<RefundTicket> getTicketsByEmployeeId(int employee_id);
 	

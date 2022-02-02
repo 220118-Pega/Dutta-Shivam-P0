@@ -13,5 +13,5 @@ public interface EController {
 	Handler getById();
 	Handler add();
 	Handler update();
-
+	Handler getFilteredTickets();
 }

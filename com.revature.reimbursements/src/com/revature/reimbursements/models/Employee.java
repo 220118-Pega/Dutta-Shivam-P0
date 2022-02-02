@@ -22,14 +22,16 @@ public class Employee {
 		this.phoneNumber=phoneNumber;
 		this.isManager=isManager;
 	}
+
 	
-	public Employee(int employeeId,String employeeName, String employeeLocale, int phoneNumber,List<RefundTicket>tickets) {
+	
+	public Employee(String employeeName, String employeeLocale, int phoneNumber,boolean isManager,int employeeId) {
+		this(employeeName,employeeLocale,phoneNumber,isManager);
 		this.employeeId=employeeId;
-		this.employeeName=employeeName;
-		this.employeeLocale=employeeLocale;
-		this.phoneNumber=phoneNumber;
-		this.tickets=tickets;
 	}
+	
+	
+	
 	
 	
 	public Employee(String employeeName, String employeeLocale, int phoneNumber) {

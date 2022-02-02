@@ -5,13 +5,13 @@ package com.revature.reimbursements.controllers;
 import com.revature.reimbursement.bl.IEmployeeBL;
 import com.revature.reimbursement.bl.ITicketBL;
 import com.revature.reimbursements.enums.Status;
+import com.revature.reimbursements.models.Employee;
 import com.revature.reimbursements.models.RefundTicket;
 
 import io.javalin.http.Handler;
 
 public class TicketController implements EController{
 	private ITicketBL ticketBL;
-
 	public TicketController(ITicketBL ticketBL) {
 		this.ticketBL=ticketBL;
 		
@@ -21,6 +21,7 @@ public class TicketController implements EController{
 		// TODO Auto-generated method stub
 		return ctx -> {
 			ctx.jsonStream(ticketBL.getTickets());
+
 		};
 	}
 
@@ -66,5 +67,16 @@ public class TicketController implements EController{
 			
 		};
 	}
+	@Override
+	public Handler getFilteredTickets() {
+		// TODO Auto-generated method stub
+		return ctx ->{
+			String queryInput = ctx.pathParam("ticket_status");
+			Status qStatus = Status.valueOf(queryInput);
+			ctx.jsonStream(ticketBL.filterStatus(qStatus));
+		};
+	}
+	
+	
 
 }

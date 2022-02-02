@@ -51,8 +51,9 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 				// 4). Mapping employee phone number---->								
 				int employeePhoneNumber = rs.getInt("employee_phone");
 				
+				
 //				return new Employee();
-				return new Employee(myId,employeeName,employeeLocale,employeePhoneNumber,employeeObj.getTickets());
+				return new Employee(employeeName,employeeLocale,employeePhoneNumber,Boolean.valueOf(rs.getBoolean("is_Manager")),myId);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -87,7 +88,7 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 				int employeePhoneNumber = rs.getInt("employee_phone");
 				employeeObj.getTickets();
 //				employees.add(new Employee());
-				employees.add(new Employee(myId,employeeName,employeeLocale,employeePhoneNumber,employeeObj.getTickets()));
+				employees.add(new Employee(employeeName,employeeLocale,employeePhoneNumber,Boolean.valueOf(rs.getBoolean("is_Manager")),myId));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -102,13 +103,14 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
 			String query = "insert into employees"
-						+ 	"(employee_name,employee_locale,employee_phone) "
-						+ 	"values(?,?,?)";
+						+ 	"(employee_name,employee_locale,employee_phone,is_Manager) "
+						+ 	"values(?,?,?,?)";
 			
 			PreparedStatement pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, newObject.getEmployeeName());
 			pstmt.setString(2, newObject.getEmployeeLocale());
 			pstmt.setInt(3, newObject.getPhoneNumber());
+			pstmt.setBoolean(4, newObject.isManager());
 			pstmt.execute();
 			newObject.setTickets(null);
 		}catch(SQLException e) {

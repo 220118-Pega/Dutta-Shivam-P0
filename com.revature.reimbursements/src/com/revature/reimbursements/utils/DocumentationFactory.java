@@ -31,12 +31,16 @@ public class DocumentationFactory {
 			}).json("200", RefundTicket.class);
 		case "addTicket":
 			return OpenApiBuilder.document().operation(op -> {
-				op.addTagsItem("Ticket");
+				op.addTagsItem("Tickets");
 			}).body(RefundTicket.class).result("201");
 		case "updateTicket":
 			return OpenApiBuilder.document().operation(op -> {
-				op.addTagsItem("Ticket");
+				op.addTagsItem("Tickets");
 			}).body(RefundTicket.class).result("201");
+		case "getFilteredTickets":
+			return OpenApiBuilder.document().operation(op -> {
+				op.addTagsItem("Tickets");
+			}).jsonArray("200",RefundTicket.class);
 		default:
 			return null;
 		}

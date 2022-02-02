@@ -56,5 +56,10 @@ public class EmployeeController implements EController{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public Handler getFilteredTickets() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

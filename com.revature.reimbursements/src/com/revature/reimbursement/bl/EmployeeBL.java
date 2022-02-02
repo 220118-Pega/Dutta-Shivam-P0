@@ -35,5 +35,21 @@ public class EmployeeBL implements IEmployeeBL{
 		// TODO Auto-generated method stub
 		dbRepo.updateEmployee(newEmployee);
 	}
+
+	@Override
+	public List<RefundTicket> getTicketsIfManager(int id) throws Exception {
+		// TODO Auto-generated method stub
+		Employee getManager = dbRepo.getEmployeeById(id);
+		List<RefundTicket> allTickets = null;
+		try {
+			if(getManager.isManager()==true) {
+				allTickets=dbRepo.getTickets();
+			}
+			
+		}catch(NullPointerException e) {
+			e.printStackTrace();
+		}
+		return allTickets;
+	}
 	
 }
