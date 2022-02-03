@@ -12,4 +12,5 @@ public interface DAO<T,K> {
 	List<RefundTicket> filterStatus(Status status);
 	void add(T newObject);
 	void update(T newObject);
+	List<RefundTicket>updateTicketByManager(K employee_id, Status status);
 }

@@ -132,6 +132,7 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			logger.error("Error with connecting to db");
 		}
 	}
 		
@@ -146,6 +147,12 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 
 	@Override
 	public List<Employee> getTicketByEmployeeId(Integer employee_id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<RefundTicket> updateTicketByManager(Integer employee_id, Status status) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -172,6 +172,12 @@ public class TicketDAO implements DAO<RefundTicket,Integer> {
 		}
 		return tickets;
 	}
+
+	@Override
+	public List<RefundTicket> updateTicketByManager(Integer employee_id, Status status) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	}
 
 

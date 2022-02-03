@@ -2,6 +2,7 @@ package com.revature.reimbursements.controllers;
 
 import com.revature.reimbursement.bl.IEmployeeBL;
 import com.revature.reimbursements.models.Employee;
+import com.revature.reimbursements.models.RefundTicket;
 
 import io.javalin.http.Handler;
 
@@ -40,13 +41,7 @@ public class EmployeeController implements EController{
 	public Handler add() {
 		// TODO Auto-generated method stub
 		return ctx -> {
-			Employee newEmployee = ctx.bodyAsClass(Employee.class);
-			try {
-				employeeBL.addEmployee(newEmployee);
-				ctx.status(201);
-			}catch(Exception e) {
-				
-			}
+			employeeBL.addEmployee(ctx.bodyStreamAsClass(Employee.class));
 				
 		};
 	}
@@ -54,12 +49,30 @@ public class EmployeeController implements EController{
 	@Override
 	public Handler update() {
 		// TODO Auto-generated method stub
-		return null;
+		return ctx -> {
+			employeeBL.updateEmployee(ctx.bodyStreamAsClass(Employee.class));
+		};
 	}
 	@Override
 	public Handler getFilteredTickets() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public Handler getTicketIfManager() {
+		// TODO Auto-generated method stub
+		return ctx->{
+				int empId =Integer.parseInt(ctx.queryParam("Employee_id"));
+				
+				try {
+				ctx.jsonStream(employeeBL.getTicketsIfManager(empId));
+			}catch(NullPointerException e) {
+				e.printStackTrace();
+				ctx.res.setStatus(204);
+			}
+		
+		};
 	}
 
 }

@@ -17,15 +17,26 @@ public class Router {
 	}
 	
 	public void setUpEndPoints() {
+		
+//===============================Employee Routes====================================================================================		
+		
 		app.get("/Employees", OpenApiBuilder.documented(DocumentationFactory.getDoc("getEmployees"),employeeController.getAll()));
 		app.get("/Employees/{Employee_id}/tickets",  OpenApiBuilder.documented(DocumentationFactory.getDoc("getEmployeeById"),employeeController.getById()));
+		app.put("/Employees/{Employee_id}",OpenApiBuilder.documented(DocumentationFactory.getDoc("updateEmployee"), employeeController.update()));
 		app.post("/Employees",OpenApiBuilder.documented(DocumentationFactory.getDoc("addEmployee"), employeeController.add()));
-		app.get("/tickets", OpenApiBuilder.documented(DocumentationFactory.getDoc("getTickets"),ticketController.getAll()));
-		app.get("/tickets/{Employee_id}/tickets",  OpenApiBuilder.documented(DocumentationFactory.getDoc("getTicketByEmployeeId"),ticketController.getById()));
-		app.get("/tickets/{ticket_status}",  OpenApiBuilder.documented(DocumentationFactory.getDoc("getFilteredTickets"),ticketController.getFilteredTickets()));
-		app.post("/tickets",OpenApiBuilder.documented(DocumentationFactory.getDoc("addTicket"), ticketController.add()));
-		app.put("/tickets/{ticket_id}",OpenApiBuilder.documented(DocumentationFactory.getDoc("updateTicket"), ticketController.update()));
 		
+//================================Tickets Route ==============================================================================		
+		
+		app.get("/tickets/{ticket_id}",  OpenApiBuilder.documented(DocumentationFactory.getDoc("getTicketById"),ticketController.getById()));
+		
+		app.post("/tickets",OpenApiBuilder.documented(DocumentationFactory.getDoc("addTicket"), ticketController.add()));
+		app.put("/updatetickets",OpenApiBuilder.documented(DocumentationFactory.getDoc("updateTicket"), ticketController.update()));
+		
+//==================================Manager Routes ===================================================================================	
+		
+		app.get("/tickets", OpenApiBuilder.documented(DocumentationFactory.getDoc("getTickets"),ticketController.getAll()));
+		app.get("/filtertickets/{ticket_status}",  OpenApiBuilder.documented(DocumentationFactory.getDoc("getFilteredTickets"),ticketController.getFilteredTickets()));
+//		app.get("/tickets/{Employee_id}", OpenApiBuilder.documented(DocumentationFactory.getDoc("getTicketsIfManager"),employeeController.getTicketIfManager()));
 	}
 
 }

@@ -2,10 +2,10 @@ package com.revature.reimbursements.controllers;
 
 
 
-import com.revature.reimbursement.bl.IEmployeeBL;
+
 import com.revature.reimbursement.bl.ITicketBL;
 import com.revature.reimbursements.enums.Status;
-import com.revature.reimbursements.models.Employee;
+
 import com.revature.reimbursements.models.RefundTicket;
 
 import io.javalin.http.Handler;
@@ -29,11 +29,11 @@ public class TicketController implements EController{
 	public Handler getById() {
 		// TODO Auto-generated method stub
 		return ctx -> {
-			String id = ctx.pathParam("Employee_id");
+			String id = ctx.pathParam("ticket_id");
 			Integer actualId = Integer.parseInt(id);
 			try {
 				
-				ctx.jsonStream(ticketBL.getTicketByEmployeeId(actualId));
+				ctx.jsonStream(ticketBL.getTicketById(actualId));
 			}catch(NullPointerException ex) {
 				ctx.res.setStatus(204);
 			}
@@ -52,21 +52,11 @@ public class TicketController implements EController{
 	public Handler update() {
 		// TODO Auto-generated method stub
 		return ctx -> {
-			ticketBL.updateTicket(ctx.bodyStreamAsClass(RefundTicket.class));
-//			RefundTicket newTicket = new RefundTicket();
-//			String newStatus=ctx.queryParam("refund_status");
-//			String id = ctx.pathParam("ticket_id");
-//			int myId = Integer.parseInt(id);
-//			
-//			if(newTicket.getTicketId()==myId) {
-//				newTicket.setRefundStatus(Status.valueOf(newStatus));
-//				ticketBL.updateTicket(newTicket);
-//			}else {
-//				ctx.res.setStatus(204);
-//			}
-			
+				ticketBL.updateTicket(ctx.bodyStreamAsClass(RefundTicket.class));
 		};
 	}
+				
+			
 	@Override
 	public Handler getFilteredTickets() {
 		// TODO Auto-generated method stub
@@ -75,6 +65,12 @@ public class TicketController implements EController{
 			Status qStatus = Status.valueOf(queryInput);
 			ctx.jsonStream(ticketBL.filterStatus(qStatus));
 		};
+	}
+	
+	@Override
+	public Handler getTicketIfManager() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

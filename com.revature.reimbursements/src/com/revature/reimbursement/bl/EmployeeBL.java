@@ -44,6 +44,8 @@ public class EmployeeBL implements IEmployeeBL{
 		try {
 			if(getManager.isManager()==true) {
 				allTickets=dbRepo.getTickets();
+			}else {
+				return null;
 			}
 			
 		}catch(NullPointerException e) {
