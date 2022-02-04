@@ -16,6 +16,18 @@ public class Employee {
 		
 	}
 	
+	
+	
+	public Employee(int employeeId, String employeeName, String employeeLocale, int phoneNumber) {
+		super();
+		this.employeeId = employeeId;
+		this.employeeName = employeeName;
+		this.employeeLocale = employeeLocale;
+		this.phoneNumber = phoneNumber;
+	}
+
+
+
 	public Employee(String employeeName, String employeeLocale, int phoneNumber,boolean isManager) {
 		this.employeeName=employeeName;
 		this.employeeLocale=employeeLocale;
@@ -25,13 +37,16 @@ public class Employee {
 
 	
 	
+	public Employee(String employeeName, String employeeLocale, int phoneNumber,boolean isManager,int employeeId,List<RefundTicket> tickets) {
+		this(employeeName,employeeLocale,phoneNumber,isManager,employeeId);
+		this.tickets=tickets;
+	}
+	
+	
 	public Employee(String employeeName, String employeeLocale, int phoneNumber,boolean isManager,int employeeId) {
 		this(employeeName,employeeLocale,phoneNumber,isManager);
 		this.employeeId=employeeId;
 	}
-	
-	
-	
 	
 	
 	public Employee(String employeeName, String employeeLocale, int phoneNumber) {

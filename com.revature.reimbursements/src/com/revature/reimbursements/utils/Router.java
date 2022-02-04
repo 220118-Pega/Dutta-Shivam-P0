@@ -30,11 +30,11 @@ public class Router {
 		app.get("/tickets/{ticket_id}",  OpenApiBuilder.documented(DocumentationFactory.getDoc("getTicketById"),ticketController.getById()));
 		
 		app.post("/tickets",OpenApiBuilder.documented(DocumentationFactory.getDoc("addTicket"), ticketController.add()));
-		app.put("/updatetickets",OpenApiBuilder.documented(DocumentationFactory.getDoc("updateTicket"), ticketController.update()));
+		app.put("/updatetickets/{ticketId}",OpenApiBuilder.documented(DocumentationFactory.getDoc("updateTicket"), ticketController.update()));
 		
 //==================================Manager Routes ===================================================================================	
 		
-		app.get("/tickets", OpenApiBuilder.documented(DocumentationFactory.getDoc("getTickets"),ticketController.getAll()));
+		app.get("/gettickets", OpenApiBuilder.documented(DocumentationFactory.getDoc("getTickets"),ticketController.getAll()));
 		app.get("/filtertickets/{ticket_status}",  OpenApiBuilder.documented(DocumentationFactory.getDoc("getFilteredTickets"),ticketController.getFilteredTickets()));
 //		app.get("/tickets/{Employee_id}", OpenApiBuilder.documented(DocumentationFactory.getDoc("getTicketsIfManager"),employeeController.getTicketIfManager()));
 	}

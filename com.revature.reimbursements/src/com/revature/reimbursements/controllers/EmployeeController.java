@@ -33,6 +33,7 @@ public class EmployeeController implements EController{
 				ctx.jsonStream(employeeBL.getEmployeeById(actualId));
 			}catch(NullPointerException ex) {
 				ctx.res.setStatus(204);
+				ex.printStackTrace();
 			}
 		};
 	}
@@ -50,6 +51,11 @@ public class EmployeeController implements EController{
 	public Handler update() {
 		// TODO Auto-generated method stub
 		return ctx -> {
+//			employeeBL.updateEmployee(ctx.bodyStreamAsClass(Employee.class));
+			int empId = Integer.parseInt(ctx.pathParam("Employee_id"));
+			boolean getMan = Boolean.valueOf(ctx.queryParam("is_Manager"));
+			Employee empObj = new Employee();
+			empObj.setManager(getMan);
 			employeeBL.updateEmployee(ctx.bodyStreamAsClass(Employee.class));
 		};
 	}

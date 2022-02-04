@@ -53,7 +53,7 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 				
 				
 //				return new Employee();
-				return new Employee(employeeName,employeeLocale,employeePhoneNumber,Boolean.valueOf(rs.getBoolean("is_Manager")),myId);
+				return new Employee(myId, employeeName,employeeLocale,employeePhoneNumber);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -65,8 +65,10 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 	@Override
 	public List<Employee> findAll() {
 		ArrayList<Employee> employees = new ArrayList<Employee>();
+		
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()){
 			String query = "select * from employees";
+//			String query = "select * from employees left join tickets on tickets.employee_id=employees.id";
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while(rs.next()) {
@@ -86,9 +88,10 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 				
 				// 4). Mapping employee phone number---->								
 				int employeePhoneNumber = rs.getInt("employee_phone");
-				employeeObj.getTickets();
+				
+				
 //				employees.add(new Employee());
-				employees.add(new Employee(employeeName,employeeLocale,employeePhoneNumber,Boolean.valueOf(rs.getBoolean("is_Manager")),myId));
+				employees.add(new Employee(myId, employeeName,employeeLocale,employeePhoneNumber));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -126,7 +129,7 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String query = "update employees set is_Manager = ? where id = ?";
 			PreparedStatement pstmt = conn.prepareStatement(query);
-			pstmt.setBoolean(1, !newObject.isManager());
+			pstmt.setBoolean(1, newObject.isManager());
 			pstmt.setInt(2, newObject.getEmployeeId());
 			pstmt.execute();
 		} catch (SQLException e) {
@@ -148,6 +151,7 @@ public class EmployeeDAO implements DAO<Employee,Integer>{
 	@Override
 	public List<Employee> getTicketByEmployeeId(Integer employee_id) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

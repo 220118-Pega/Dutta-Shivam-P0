@@ -27,6 +27,7 @@ public class DBRepository implements IRepository{
 	@Override
 	public List<RefundTicket> getTickets() throws Exception {
 		// TODO Auto-generated method stub
+		
 		return ticketDAO.findAll();
 	}
 
@@ -45,8 +46,8 @@ public class DBRepository implements IRepository{
 	@Override
 	public void addEmployee(Employee newEmployee) {
 		// TODO Auto-generated method stub
-		
-		employeeDAO.add(newEmployee);
+			employeeDAO.add(newEmployee);
+
 	}
 
 	@Override
@@ -76,6 +77,7 @@ public class DBRepository implements IRepository{
 	@Override
 	public List<Employee> getEmployees() throws Exception {
 		// TODO Auto-generated method stub
+		
 		return employeeDAO.findAll();
 	}
 
