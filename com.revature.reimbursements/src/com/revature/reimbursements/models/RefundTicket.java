@@ -1,6 +1,9 @@
 package com.revature.reimbursements.models;
 
+import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import com.revature.reimbursements.enums.Reimbursement;
 import com.revature.reimbursements.enums.Status;
@@ -11,7 +14,9 @@ public class RefundTicket {
 	private int refundAmount;
 	private Reimbursement refundType;
 	private Status refundStatus;
-	private Instant timeStamp;
+//	private Timestamp timeStamp;
+//	private Date timeStamp;
+	private LocalDateTime timeStamp;
 	private int employeeId;
 	
 	
@@ -23,7 +28,7 @@ public class RefundTicket {
 		this.refundStatus=refundStatus;
 	}
 	
-	public RefundTicket(int refundAmount,Reimbursement refundType,Status refundStatus,Instant timeStamp,int employeeId) {
+	public RefundTicket(int refundAmount,Reimbursement refundType,Status refundStatus,LocalDateTime timeStamp,int employeeId) {
 		this.refundAmount=refundAmount;
 		this.refundType=refundType;
 		this.refundStatus=refundStatus;
@@ -31,7 +36,7 @@ public class RefundTicket {
 		this.employeeId=employeeId;
 	}
 	
-	public RefundTicket(int refundAmount,Reimbursement refundType,Status refundStatus,Instant timeStamp,int employeeId,int ticketId) {
+	public RefundTicket(int refundAmount,Reimbursement refundType,Status refundStatus,LocalDateTime timeStamp,int employeeId,int ticketId) {
 		this(refundAmount,refundType,refundStatus,timeStamp,employeeId);
 		this.ticketId=ticketId;
 	}
@@ -66,11 +71,11 @@ public class RefundTicket {
 		this.refundStatus = refundStatus;
 	}
 
-	public Instant getTimeStamp() {
+	public LocalDateTime getTimeStamp() {
 		return timeStamp;
 	}
 
-	public void setTimeStamp(Instant timeStamp) {
+	public void setTimeStamp(LocalDateTime timeStamp) {
 		this.timeStamp = timeStamp;
 	}
 

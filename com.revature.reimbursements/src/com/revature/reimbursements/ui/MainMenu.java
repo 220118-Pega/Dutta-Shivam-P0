@@ -1,6 +1,8 @@
 package com.revature.reimbursements.ui;
 
+import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -217,8 +219,8 @@ private void createTicket() throws Exception {
 			System.out.println("Please Enter the Transaction Amount");
 			String userAmount = myScanner.nextLine();
 			int transAmount = Integer.valueOf(userAmount);
-
-			RefundTicket myTicket = new RefundTicket(transAmount, type,Status.PENDING,Instant.now(),employee.getEmployeeId());
+			LocalDateTime timeNow = LocalDateTime.now();
+			RefundTicket myTicket = new RefundTicket(transAmount, type,Status.PENDING,timeNow,employee.getEmployeeId());
 			myTicket.setEmployeeId(employeeId);
 			ticketBL.addTicket(myTicket);
 

@@ -1,12 +1,14 @@
 package com.revature.reimbursement.dl;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,8 +41,14 @@ public class TicketDAO implements DAO<RefundTicket,Integer> {
 				Reimbursement myRefType = Reimbursement.valueOf(rs.getString("refund_type"));
 				int refAmount = rs.getInt("refund_amount");
 				int empId = rs.getInt("employee_id");
-				Instant timeNow = (rs.getTimestamp("refund_time").toInstant());
-				return new RefundTicket(refAmount,myRefType,myRefStatus,timeNow,empId,myId);
+				
+				Timestamp timeNow = (rs.getTimestamp("refund_time"));
+				LocalDateTime getTime = timeNow.toLocalDateTime();
+				
+//				Instant timeNow = (rs.getTimestamp("refund_time").toInstant());
+//				Date getTime = Date.from(timeNow);
+				
+				return new RefundTicket(refAmount,myRefType,myRefStatus,getTime,empId,myId);
 				
 //				if(timeNow==null) {
 //					logger.error("Timestamp not found");
@@ -69,8 +77,12 @@ public class TicketDAO implements DAO<RefundTicket,Integer> {
 				Reimbursement myRefType = Reimbursement.valueOf(rs.getString("refund_type"));
 				Status myRefStatus = Status.valueOf(rs.getString("refund_status"));
 				int empId = rs.getInt("employee_id");
-				Instant timeNow = rs.getTimestamp("refund_time").toInstant();
-				refundTickets.add(new RefundTicket(refAmount,myRefType,myRefStatus,timeNow,empId,myId));
+//				Instant timeNow = (rs.getTimestamp("refund_time").toInstant());
+				Timestamp timeNow = rs.getTimestamp("refund_time");
+				LocalDateTime getTime = timeNow.toLocalDateTime();
+//				Date getTime = Date.from(timeNow);
+				
+				refundTickets.add(new RefundTicket(refAmount,myRefType,myRefStatus,getTime,empId,myId));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -95,6 +107,7 @@ public class TicketDAO implements DAO<RefundTicket,Integer> {
 			pstmt.setInt(1, newObject.getRefundAmount());
 			pstmt.setString(2, newObject.getRefundType().toString());
 			pstmt.setString(3, Status.PENDING.toString());
+//			pstmt.setTimestamp(4, newObject.getTimeStamp());
 			pstmt.setTimestamp(4, Timestamp.from(Instant.now()));
 			pstmt.setInt(5, newObject.getEmployeeId());
 			pstmt.execute();
@@ -136,9 +149,11 @@ public class TicketDAO implements DAO<RefundTicket,Integer> {
 				Reimbursement myRefType = Reimbursement.valueOf(rs.getString("refund_type"));
 				Status myRefStatus = Status.valueOf(rs.getString("refund_status"));
 				int empId = rs.getInt("employee_id");
+				
 				Timestamp timeNow = (rs.getTimestamp("refund_time"));
-				Instant myTime = timeNow.toInstant();
-				tickets.add(new RefundTicket(refAmount,myRefType,myRefStatus,myTime,empId,myId));
+				LocalDateTime getTime = timeNow.toLocalDateTime(); 
+//				Instant myTime = timeNow.toInstant();
+				tickets.add(new RefundTicket(refAmount,myRefType,myRefStatus,getTime,empId,myId));
 			}
 		}catch(SQLException e)
 		{
@@ -164,8 +179,12 @@ public class TicketDAO implements DAO<RefundTicket,Integer> {
 				Reimbursement myRefType = Reimbursement.valueOf(rs.getString("refund_type"));
 				Status myRefStatus = Status.valueOf(rs.getString("refund_status"));
 				int empId = rs.getInt("employee_id");
-				Instant timeNow = rs.getTimestamp("refund_time").toInstant();
-				tickets.add(new RefundTicket(refAmount,myRefType,myRefStatus,timeNow,empId,myId));
+				Timestamp timeNow = rs.getTimestamp("refund_time");
+				
+//				Instant timeNow = rs.getTimestamp("refund_time").toInstant();
+				
+				LocalDateTime getTime = timeNow.toLocalDateTime();
+				tickets.add(new RefundTicket(refAmount,myRefType,myRefStatus,getTime,empId,myId));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
