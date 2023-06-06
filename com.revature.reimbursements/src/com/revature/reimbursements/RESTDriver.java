@@ -28,9 +28,14 @@ public class RESTDriver {
 		EController eController = new EmployeeController(new EmployeeBL(new DBRepository(new TicketDAO(),new EmployeeDAO())));
 		EController tController = new TicketController(new TicketBL(new DBRepository(new TicketDAO(),new EmployeeDAO())));
 		
+		/*
 		Javalin app = Javalin.create(config -> {
 			config.registerPlugin(new OpenApiPlugin(getOpenApiOptions()));
 		}).start(7000);
+		*/
+		//To enable cors
+		Javalin app = Javalin.create(config -> config.enableCorsForAllOrigins()).start(7000);
+		
 		Router router = new Router(app,eController,tController);
 		router.setUpEndPoints();
 	}
